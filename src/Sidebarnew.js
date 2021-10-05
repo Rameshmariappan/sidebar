@@ -139,7 +139,9 @@ const PersistentDrawerLeft = (props) => {
             edge="start"
             sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
-            <ChevronRightIcon />
+            <div>
+              <ChevronRightIcon />
+            </div>
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             Jira Software
@@ -166,13 +168,15 @@ const PersistentDrawerLeft = (props) => {
               <li>newproject</li>
             </div>
           </div>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
+          <div className="right">
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </div>
         </DrawerHeader>
         <Divider />
 

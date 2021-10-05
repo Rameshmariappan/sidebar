@@ -9,8 +9,34 @@ import Code from "./Code";
 import ProjectPages from "./ProjectPages";
 import AddShortcuts from "./AddShortcuts";
 import ProjectSettings from "./ProjectSettings";
+import { useState, useEffect } from "react";
+import Image from "./Image";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function App() {
+  const [images, setImages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    fetch(`https://picsum.photos/v2/list?page=${currentPage}&limit=10`)
+      .then((res) => res.json())
+      .then((data) => {
+        setImages(data);
+      });
+  }, []);
+
+  const nextScroll = () => {
+    let scrollnum = currentPage + 1;
+    setCurrentPage(scrollnum);
+    console.log(currentPage);
+    fetch(`https://picsum.photos/v2/list?page=${scrollnum}&limit=10`)
+      .then((res) => res.json())
+      .then((data) => {
+        setImages([...images, ...data]);
+      });
+  };
+
+  console.log(images);
   return (
     <div className="App">
       {/* <Sidebar /> */}
@@ -46,6 +72,18 @@ function App() {
           />
         </Switch>
       </Router>
+      <div className="image-container">
+        {images.length > 0 &&
+          images.map((image) => <Image key={image.id} {...image} />)}
+      </div>
+      <div>
+        <InfiniteScroll
+          dataLength={images.length}
+          next={nextScroll}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        />
+      </div>
     </div>
   );
 }

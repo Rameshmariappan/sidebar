@@ -1,0 +1,30 @@
+.image-container {
+  margin-left: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 100px;
+}
+.image {
+  background-color: #3e87d1;
+  width: 400px;
+  display: grid;
+  margin: 20px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 3px;
+}
+.image img {
+  max-width: 100%;
+}
+.author {
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+}
+.right {
+  position: absolute;
+  margin-right: 0px;
+  padding-right: 0px;
+}
